@@ -69,9 +69,9 @@ export function Subscribe() {
                     </div>
           
             </div>
+            <div className=" min-h-[500px] bg-screen w-[1000px] bg-cover bg-no-repeat mx-auto">
 
-
-            <img src="/src/assets/screen.png" className="mt-10" alt="screen" />
+            </div>
         </div>
     );
 }
