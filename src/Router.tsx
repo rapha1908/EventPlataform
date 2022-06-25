@@ -5,7 +5,7 @@ import { Subscribe } from "./Pages/Subscribe";
 export function Router() {
     return(
         <Routes>
-            <Route path="/" element={<Subscribe />} />
+            <Route path="/" element={<Event  />} />
             <Route path="/event" element={<Event  />} />
             <Route path="/event/lesson/:slug" element={<Event  />} />
 

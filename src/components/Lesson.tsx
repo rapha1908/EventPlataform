@@ -37,30 +37,30 @@ export function Lesson(props: LessonProps){
                  {availableformatted}
             </span>
             
-            <div className={`rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500 ${isActiveLesson ? 'bg-green-500' : '' } ${!isLessonAvailable ? 'opacity-50' : '' }`} >
+            <div className={`rounded border border-gray-500 p-4 mt-2 group-hover:border-tccheblue-300 ${isActiveLesson ? 'bg-tccheblue-400' : 'bg-gray-50 ' } ${!isLessonAvailable ? 'opacity-50' : '' }`} >
                 <header className="flex items-center justify-between">
                     {isLessonAvailable ? 
                         (
-                            <span className={`text-sm text-blue-500 font-medium flex items-center gap-2 ${isActiveLesson ? 'text-gray-100' : '' }`}>
+                            <span className={`text-sm text-tccheblue-300 font-medium flex items-center gap-2 ${isActiveLesson ? 'text-white' : '' }`}>
                                 <CheckCircle size={20} />
                                    Conteudo Liberado
                             </span>
                         ):
                         (
-                            <span className={`text-sm text-orange-500 font-medium flex items-center gap-2`}>
+                            <span className={`text-sm text-orange-600 font-medium flex items-center gap-2`}>
                                 <Lock size={20} />
                                 Em breve
                             </span>
                         )
                     }
           
-                    <span className="text-xs rounded px-2 py-[2px] text-white border border-green-300 font-bold">
-                        {props.type === 'live' ? 'Ao VIVO' : 'aula pratica'} 
+                    <span className="text-xs rounded px-2 py-[2px] text-gray-600 border border-tccheblue-300 font-bold">
+                        {props.type === 'live' ? 'LIVE' : 'CLASS'} 
                     </span>
 
                 </header>
 
-                <strong className={`text-gray-200 mt-5 block ${isActiveLesson ? 'text-gray-100' : '' }`}>
+                <strong className={`text-gray-500 mt-5 block ${isActiveLesson ? 'text-gray-100' : '' }`}>
                     {props.title} 
                 </strong>
             </div>
