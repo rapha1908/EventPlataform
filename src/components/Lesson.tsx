@@ -43,18 +43,18 @@ export function Lesson(props: LessonProps){
                         (
                             <span className={`text-sm text-tccheblue-300 font-medium flex items-center gap-2 ${isActiveLesson ? 'text-white' : '' }`}>
                                 <CheckCircle size={20} />
-                                   Conteudo Liberado
+                                   Class Available
                             </span>
                         ):
                         (
                             <span className={`text-sm text-orange-600 font-medium flex items-center gap-2`}>
                                 <Lock size={20} />
-                                Em breve
+                                Coming soon
                             </span>
                         )
                     }
           
-                    <span className="text-xs rounded px-2 py-[2px] text-gray-600 border border-tccheblue-300 font-bold">
+                    <span className={`text-xs rounded px-2 py-[2px]  border border-tccheblue-300 font-bold ${isActiveLesson ? 'text-white' : 'text-gray-600' }`}>
                         {props.type === 'live' ? 'LIVE' : 'CLASS'} 
                     </span>
 
