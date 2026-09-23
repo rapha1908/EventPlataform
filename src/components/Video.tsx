@@ -1,5 +1,5 @@
 import { DefaultUi, Player, Vimeo, Youtube } from "@vime/react";
-import { CaretRight, DiscordLogo, FacebookLogo, FileArrowDown, InstagramLogo, Lightning } from "phosphor-react";
+import { QueryFeedback } from "./QueryFeedback";
 import '@vime/core/themes/default.css';
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 import { parseVideo } from "../utils/video";
@@ -13,16 +13,19 @@ interface VideoProps {
 
 export function Video(props: VideoProps){
     
-    const { data } = useGetLessonBySlugQuery({
+    const { data, loading, error, refetch } = useGetLessonBySlugQuery({
+        notifyOnNetworkStatusChange: true,
         variables: {
             slug: props.lessonSlug,
         }
     })
 
-    if (!data || !data.lesson){
+    if (loading || error || !data?.lesson){
         return (
             <div className="flex-1">
-                <p>Loading...</p>
+                {loading ? <QueryFeedback message="Loading lesson..." />
+                : error ? <QueryFeedback message="We couldn't load this lesson. Please try again." onRetry={() => refetch()} />
+                : <QueryFeedback message="Lesson not found. Choose another lesson from the schedule." />}
             </div>
         )
     }
@@ -69,56 +72,8 @@ export function Video(props: VideoProps){
                       )}
 
                     </div>
-                    <div className="flex flex-col gap-4">
-                        <a href="#" className="p-4 text-sm bg-green-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-green-700 transition-colors">
-                            <FacebookLogo size={24}/>
-                            Facebook Community
-                        </a>
-
-                        <a href="#" className="p-4 text-sm border border-tccheblue-500 text-tccheblue-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-tccheblue-500 transition-colors hover:text-gray-50">
-                            <InstagramLogo size={24}/>
-                            Instagram Community
-                        </a>
-                    </div>
                 </div>
-
-                <div className="gap-8 mt-20 grid grid-cols-2 "> 
-                    <a href="#" className="bg-gray-100 rounded overflow-hidden flex items-start gap-6 hover:bg-tccheblue-100 transition-colors">
-                        <div className="bg-green-700 h-full p-6 flex items-center">
-                            <FileArrowDown size={40} />
-
-                        </div>
-                        <div className="py-6 leading-relaxed">
-                            <strong className="text-2xl text-gray-900">Supporting material</strong>
-                            <p className="text-sm text-gray-900 mt-2">Access the supporting material to speed up your progress</p>
-                            
-
-                        </div>
-                        <div className="h-full p-6 flex items-center">
-                            <CaretRight />
-                        </div>
-                    </a>
-                    <a href="#" className="bg-gray-100 rounded overflow-hidden flex items-start gap-6 hover:bg-tccheblue-100 transition-colors">
-                        <div className="bg-green-700 h-full p-6 flex items-center">
-                            <FileArrowDown size={40} />
-
-                        </div>
-                        <div className="py-6 leading-relaxed">
-                            <strong className="text-2xl text-gray-900">Exclusive wallpapers</strong>
-                            <p className="text-sm text-gray-900 mt-2">Download exclusive wallpapers and personalize your device</p>
-                            
-
-                        </div>
-                        <div className="h-full p-6 flex items-center">
-                            <CaretRight />
-                        </div>
-                    </a>
-                
-                </div>
-
-
             </div>
-
         </div>
     )
 }

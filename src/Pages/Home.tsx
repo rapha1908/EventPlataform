@@ -2,9 +2,10 @@ import { Card } from "../components/Card";
 import { Header } from "../components/Header";
 import { useGetEventsQuery } from "../graphql/generated";
 import { getVideoThumbnail } from "../utils/video";
+import { QueryFeedback } from "../components/QueryFeedback";
 
 export function Home(){
-    const { data } = useGetEventsQuery()
+    const { data, loading, error, refetch } = useGetEventsQuery({ notifyOnNetworkStatusChange: true })
 
     return(
         <div className="flex flex-col min-h-screen">
@@ -14,8 +15,12 @@ export function Home(){
                     Events
                 </h1>
 
-                {!data ? (
-                    <p className="text-gray-600">Loading...</p>
+                {loading ? (
+                    <QueryFeedback message="Loading events..." />
+                ) : error ? (
+                    <QueryFeedback message="We couldn't load the events. Please try again." onRetry={() => refetch()} />
+                ) : !data?.events.length ? (
+                    <QueryFeedback message="No events are available yet." />
                 ) : (
                     <div className="grid grid-cols-3 gap-8">
                         {data.events.map(event => {

@@ -18,22 +18,12 @@ export function Lesson(props: LessonProps){
     const isLessonAvailable = isPast(props.availableAt);
     const availableformatted = format(props.availableAt,"PPPP")
 
-    const meuLink = myLink()
-
-    function myLink(){
-        if (isLessonAvailable){
-            return `/event/${props.eventSlug}/lesson/${props.slug}`
-        } else{
-            return `#`
-        }
-    }
-
     const isActiveLesson = slug === props.slug;
       
 
 
-    return(
-        <Link to={meuLink} className="group">
+    const content = (
+        <>
             <span className="text-gray-300">
                  {availableformatted}
             </span>
@@ -65,6 +55,12 @@ export function Lesson(props: LessonProps){
                     {props.title} 
                 </strong>
             </div>
-        </Link>
-    )
+        </>
+    );
+
+    return isLessonAvailable ? (
+        <Link to={`/event/${props.eventSlug}/lesson/${props.slug}`} className="group">{content}</Link>
+    ) : (
+        <div className="group" aria-disabled="true">{content}</div>
+    );
 }

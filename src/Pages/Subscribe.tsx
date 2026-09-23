@@ -1,4 +1,3 @@
-import { gql, useMutation } from "@apollo/client";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
@@ -35,10 +34,10 @@ export function Subscribe() {
                 <div className="max-w-[640px]">
                     <Logo />
                     <h1 className="mt-8 text-[2.5rem] leading-tight">
-                        Build a <strong className="text-blue-500">complete application</strong> from scratch with <strong className="text-blue-500">React</strong>
+                        Discover <strong className="text-blue-500">video events</strong> and learn at your own pace
                         </h1>
                     <p className="mt-4 text-gray-200 leading-relaxed">
-                        In just one week, you will get hands-on with one of the most widely used and in-demand technologies, opening the door to the best opportunities in the market.
+                        Explore guided sessions and follow each event's lesson schedule.
                     </p>
                 
                 </div>

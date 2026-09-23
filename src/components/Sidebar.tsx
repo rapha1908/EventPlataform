@@ -2,13 +2,15 @@ import { ArrowLeft } from "phosphor-react";
 import { Link } from "react-router-dom";
 import { useGetLessonsQuery } from "../graphql/generated";
 import { Lesson } from "./Lesson";
+import { QueryFeedback } from "./QueryFeedback";
 
 interface SidebarProps {
     eventSlug: string;
 }
 
 export function Sidebar(props: SidebarProps){
-    const {data} = useGetLessonsQuery({
+    const {data, loading, error, refetch} = useGetLessonsQuery({
+        notifyOnNetworkStatusChange: true,
         variables: {
             eventSlug: props.eventSlug,
         }
@@ -26,7 +28,15 @@ export function Sidebar(props: SidebarProps){
             </span>
 
             <div className="flex flex-col gap-8">
-              {data?.event?.lessons.map(lesson => {
+              {loading ? (
+                <QueryFeedback message="Loading schedule..." />
+              ) : error ? (
+                <QueryFeedback message="We couldn't load the schedule. Please try again." onRetry={() => refetch()} />
+              ) : !data?.event ? (
+                <QueryFeedback message="Event not found." />
+              ) : !data.event.lessons.length ? (
+                <QueryFeedback message="No lessons are available for this event yet." />
+              ) : data.event.lessons.map(lesson => {
                 return(
                     <Lesson 
                     key={lesson.id}
