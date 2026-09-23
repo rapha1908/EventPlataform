@@ -1,4 +1,4 @@
-// Aceita a URL completa ou só o ID, do YouTube ou do Vimeo
+// Accepts either the full URL or just the ID, from YouTube or Vimeo
 export function parseVideo(value: string) {
     const youtube = value.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
     if (youtube) return { provider: 'youtube', id: youtube[1] };

@@ -35,15 +35,15 @@ export function Subscribe() {
                 <div className="max-w-[640px]">
                     <Logo />
                     <h1 className="mt-8 text-[2.5rem] leading-tight">
-                        Construa uma <strong className="text-blue-500">aplicação completa</strong>, do zero, com <strong className="text-blue-500">React</strong>
+                        Build a <strong className="text-blue-500">complete application</strong> from scratch with <strong className="text-blue-500">React</strong>
                         </h1>
                     <p className="mt-4 text-gray-200 leading-relaxed">
-                        Em apenas uma semana você vai dominar na prática uma das tecnologias mais utilizadas e com alta demanda para acessar as melhores oportunidades do mercado.
+                        In just one week, you will get hands-on with one of the most widely used and in-demand technologies, opening the door to the best opportunities in the market.
                     </p>
                 
                 </div>
                 <div className="p-8 bg-gray-700 border border-gray-500 rounded">
-                        <strong className="text-2xl mb-6 block"> inscreva-se GRATUITAMENTE</strong>
+                        <strong className="text-2xl mb-6 block">Subscribe for free</strong>
                         <form onSubmit={HandleSubscribe} className="flex flex-col gap-2 w-full">
                             <input 
                                 type="text" 
@@ -62,7 +62,7 @@ export function Subscribe() {
                                 type="submit"
                                 disabled={loading}
                                 className="my-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50">
-                                Garantir minha vaga
+                                Get my spot
                             </button>
 
                         </form>
