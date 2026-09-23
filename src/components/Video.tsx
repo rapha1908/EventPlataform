@@ -1,10 +1,21 @@
-import { DefaultUi, Player, Vimeo } from "@vime/react";
+import { DefaultUi, Player, Vimeo, Youtube } from "@vime/react";
 import { CaretRight, DiscordLogo, FacebookLogo, FileArrowDown, InstagramLogo, Lightning } from "phosphor-react";
 import '@vime/core/themes/default.css';
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 
 
 
+
+// Aceita a URL completa ou só o ID, do YouTube ou do Vimeo
+function parseVideo(value: string) {
+    const youtube = value.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+    if (youtube) return { provider: 'youtube', id: youtube[1] };
+
+    const vimeo = value.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vimeo) return { provider: 'vimeo', id: vimeo[1] };
+
+    return { provider: /^\d+$/.test(value) ? 'vimeo' : 'youtube', id: value };
+}
 
 interface VideoProps {
     lessonSlug: string;
@@ -28,12 +39,16 @@ export function Video(props: VideoProps){
         
         
 
+    const video = parseVideo(data.lesson.videoId);
+
     return(
         <div className="flex-1">
             <div className="bg-black flex justify-center">
-                <div className="h-full w-full max-w-[1100px] max-h-[60vh] aspect-video">
+                <div className="w-full max-w-[min(1100px,106.67vh)]">
                     <Player>
-                        <Vimeo videoId={data.lesson.videoId} />
+                        {video.provider === 'youtube'
+                            ? <Youtube videoId={video.id} />
+                            : <Vimeo videoId={video.id} />}
                         <DefaultUi />
                     </Player>
                     </div>                
