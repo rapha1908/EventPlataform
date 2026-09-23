@@ -24,7 +24,7 @@ export function Subscribe() {
             }
         })
 
-        navegate('/event/')
+        navegate('/')
 
     }
 

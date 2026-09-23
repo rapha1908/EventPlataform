@@ -5,7 +5,7 @@ import { Video } from "../components/Video";
 
 
 export function Event(){
-    const { slug } = useParams<{slug: string}>()
+    const { eventSlug, slug } = useParams<{eventSlug: string, slug: string}>()
 
     return(
         <div className="flex flex-col min-h-screen">
@@ -15,7 +15,7 @@ export function Event(){
                 ? <Video lessonSlug={slug} /> 
                 : <div className="flex-1" />
                 }
-                <Sidebar />
+                <Sidebar eventSlug={eventSlug!} />
             </main>
         </div>
     )

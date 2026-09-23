@@ -3,6 +3,7 @@ import { format, isPast } from "date-fns"
 import { Link, useParams } from "react-router-dom";
 
 interface LessonProps {
+    eventSlug: string;
     title: string;
     slug: string;
     availableAt: Date;
@@ -21,7 +22,7 @@ export function Lesson(props: LessonProps){
 
     function myLink(){
         if (isLessonAvailable){
-            return `/event/lesson/${props.slug}`
+            return `/event/${props.eventSlug}/lesson/${props.slug}`
         } else{
             return `#`
         }

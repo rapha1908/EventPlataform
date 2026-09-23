@@ -1,0 +1,12 @@
+query GetEvents {
+    events(stage: PUBLISHED) {
+        id
+        slug
+        name
+        description
+        lessons(orderBy: availableAt_ASC) {
+            id
+            videoId
+        }
+    }
+}

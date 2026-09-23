@@ -1,4 +1,7 @@
-schema: https://api-eu-west-2.graphcms.com/v2/cl4oahm261md501xx4ocq3hnl/master
+schema:
+  - ${VITE_API_URL}:
+      headers:
+        Authorization: Bearer ${VITE_API_ACCESS_TOKEN}
 documents: './src/graphql/**/*.graphql'
 generates:
   ./src/graphql/generated.ts:
@@ -11,4 +14,3 @@ generates:
       withHooks: true
       withHOC: false
       withComponents: false
-      

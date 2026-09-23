@@ -1,9 +1,12 @@
-query GetLessons {
-        lessons(orderBy: availableAt_ASC, stage: PUBLISHED) {
+query GetLessons($eventSlug: String) {
+    event(where: {slug: $eventSlug}, stage: PUBLISHED) {
+        name
+        lessons(orderBy: availableAt_ASC) {
             id
             slug
             availableAt
             lessonType
             title
+        }
     }
 }

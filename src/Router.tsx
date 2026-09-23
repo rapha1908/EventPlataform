@@ -1,13 +1,14 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Event } from "./Pages/Event"
-import { Subscribe } from "./Pages/Subscribe";
+import { Home } from "./Pages/Home";
 
 export function Router() {
     return(
         <Routes>
-            <Route path="/" element={<Event  />} />
-            <Route path="/event" element={<Event  />} />
-            <Route path="/event/lesson/:slug" element={<Event  />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/event" element={<Navigate to="/" replace />} />
+            <Route path="/event/:eventSlug" element={<Event  />} />
+            <Route path="/event/:eventSlug/lesson/:slug" element={<Event  />} />
 
         </Routes>
         );
